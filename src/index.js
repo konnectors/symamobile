@@ -159,6 +159,7 @@ async function getFactures(fields, bFacture_Detail) {
     await saveBills(factures, fields, {
       subPath: '',
       identifiers: ['vendor'],
+      fileIdAttributes: ['vendorRef'],
       sourceAccount: fields.login,
       sourceAccountIdentifier: fields.login,
       fileAttributes: {
