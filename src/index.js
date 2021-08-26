@@ -176,6 +176,7 @@ async function getFactures(fields, bFacture_Detail) {
   } else {
     await saveFiles(factures, fields, {
       identifiers: ['vendor'],
+      fileIdAttributes: ['vendorRef'],
       sourceAccount: fields.login,
       sourceAccountIdentifier: fields.login,
       fileAttributes: {
