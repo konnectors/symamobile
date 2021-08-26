@@ -1,17 +1,19 @@
 {
   "version": "1.0.0",
-  "name": "Connector template",
+  "name": "Connector Syma Mobile",
   "type": "konnector",
   "language": "node",
   "icon": "icon.png",
-  "slug": "template",
-  "source": "git@github.com:konnectors/template.git",
-  "editor": "Cozy",
-  "vendor_link": "Link to the target website",
-  "categories": ["others"],
+  "slug": "symamobile",
+  "source": "git@github.com:chulakseb/cozy-konnector-symamobile.git",
+  "editor": "chulakseb",
+  "vendor_link": "https://www.symamobile.com",
+  "categories": [
+	"telecom"
+	],
   "fields": {
     "login": {
-      "type": "text"
+      "type": "phone"
     },
     "password": {
       "type": "password"
@@ -37,14 +39,13 @@
     }
   },
   "developer": {
-    "name": "Cozy Cloud",
-    "url": "https://cozy.io"
+    "name": "Sebastien Flourette"
   },
   "langs": ["fr", "en"],
   "locales": {
     "fr": {
-      "short_description": "Récupère la liste de livres",
-      "long_description": "Récupère la liste de livre sur le site exemple",
+      "short_description": "Récupère les documents et factures",
+      "long_description": "Récupère les documents et factures de téléphone Syma Mobile",
       "permissions": {
         "bank operations": {
           "description": "Utilisé pour relier les factures à des operations bancaires"
@@ -57,12 +58,15 @@
         },
         "accounts": {
           "description": "Utilisé pour obtenir les données du compte"
+        },
+        "carboncopy": {
+          "description": "Utilisé pour certifier que vos fichiers sont copie conforme avec les documents d'origine"
         }
       }
     },
     "en": {
-      "short_description": "Fetch a list of books",
-      "long_description": "Fetch a list of books from the example website",
+      "short_description": "Fetch docs and bills",
+      "long_description": "Fetch docs and bills from Syma Mobile",
       "permissions": {
         "bank operations": {
           "description": "Required to link bank operations to bills"
@@ -75,10 +79,20 @@
         },
         "accounts": {
           "description": "Required to get the account's data"
+        },
+        "carboncopy": {
+          "description": "Required for carbon copy documents"
         }
       }
     }
   },
-  "banksTransactionRegExp": "\\bbooks\\b",
+  "banksTransactionRegExp": "\\bsymamobile\\b",
+  "features": [
+    "LOGIN_OK",
+    "METADATA_DEDUP",
+    "BILLS",
+    "CARBON_COPY",
+    "DOC_QUALIFICATION_V2"
+  ],
   "manifest_version": "2"
 }
