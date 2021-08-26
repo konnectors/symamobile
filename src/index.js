@@ -117,16 +117,22 @@ function authenticate(username, password) {
 // Import des Factures
 async function getFactures(fields, bFacture_Detail) {
   // Récupération de la liste des factures
-  log('info', 'Récupération de la liste des factures liées au compte')
+  log('info', 'Récupération de la liste complète de factures liées au compte')
   let liste_factures = await requestJson(`${listefacturesUrl}?facturelist=yes`)
 
-  // Conversion du JSON pour les factures simples
-  log('info', 'Mise en forme des factures')
-
-  if (bFacture_Detail == FACTURE_AUTRE)
+  if (bFacture_Detail == FACTURE_SIMPLE) {
+    log('info', 'Traitement des factures simples ...')
+    liste_factures = liste_factures.factures.data
+  } else if (bFacture_Detail == FACTURE_DETAIL) {
+    log('info', 'Traitement des factures détaillées ...')
+    liste_factures = liste_factures.factures.data
+  } else if (bFacture_Detail == FACTURE_AUTRE) {
+    log('info', 'Traitement des factures autre ...')
     liste_factures = liste_factures.factures_other.data
-  else liste_factures = liste_factures.factures.data
+  }
 
+  // Conversion du JSON pour les factures
+  log('info', 'Mise en forme des factures')
   let factures = liste_factures.map(facture => ({
     vendor: VENDOR,
     date: new Date(facture.bill_date),
